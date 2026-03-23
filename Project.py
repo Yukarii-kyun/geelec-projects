@@ -6,7 +6,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 np.random.seed(123)  
-n = 1000
+n = 4000
 
 # --- Data Generation (Same as before) ---
 CaloriesPerDay = np.clip(np.random.normal(2000, 500, n), 800, 4000)
@@ -65,9 +65,12 @@ print("\nClassification Report:\n",
 # --- Prediction (New Data) ---
 new_food1 = pd.DataFrame([[3500, 90, 3, 70, 2, 5, 2, 8, 30]], columns=X.columns)
 new_food2 = pd.DataFrame([[1800, 115, 0, 20, 2, 1, 1, 15, 30]], columns=X.columns)
+new_food3 = pd.DataFrame([[2500, 100, 6, 10, 5, 2, 3, 5, 50]], columns=X.columns)
 
 pred1 = model.predict(scaler.transform(new_food1))
 pred2 = model.predict(scaler.transform(new_food2))
+pred3 = model.predict(scaler.transform(new_food3))
 
 print("Predicted Nutrition Level for Food 1:", encoder.inverse_transform(pred1)[0])
 print("Predicted Nutrition Level for Food 2:", encoder.inverse_transform(pred2)[0])
+print("Predicted Nutrition Level for Food 3:", encoder.inverse_transform(pred3)[0])
